@@ -10,7 +10,12 @@ int main(){
     cout<<"calc>>";
     getline(cin,text);
     interpreter i1 = interpreter(text);
+    int result = i1.expr();
+    cout<<"result: "<<result<<endl;
 
-    cout<<i1.text<<std::endl;
+
+
     
+
+
 }
