@@ -87,12 +87,27 @@ class interpreter{
         }
     }
 
-    int term(token& Token){
-        if(Token.type == "INT"){
+    
+
+    int factor(token& Token){
             int var = Token.value;
             eat("INT",Token);
             return var;
-        }
+    }
+
+    int term(token& currentToken){
+        int Term = factor(currentToken);
+            while(currentToken.type == "MULTI" || currentToken.type == "DIV"){
+                if(currentToken.type == "MULTI"){
+                    eat("MULTI",currentToken);
+                    Term = Term * factor(currentToken);
+                }else if (currentToken.type == "DIV"){
+                    eat("DIV",currentToken);
+                    Term = Term / factor(currentToken);
+                }
+            }
+           
+            return Term;
     }
 
 
@@ -101,7 +116,7 @@ class interpreter{
         token current_token = lex();
        int result = term(current_token);
 
-        while(current_token.type != "EOF"){
+        while(current_token.type == "ADD" || current_token.type == "SUB"){
             if(current_token.type == "ADD"){
                 eat("ADD",current_token);
                 result = result + term(current_token);
