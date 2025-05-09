@@ -1,4 +1,6 @@
-Compiler project
+Interpreter project<br />
+
+learning the skills of making an interpreter by making a custom CLI Calc
 
 
 references:
